@@ -27,6 +27,7 @@ class Repository
         $this->branches  = '';
     }
 
+
     /**
      * @return string
      */
