@@ -6,22 +6,25 @@ class Repository
 {
     private $owner;
     private $name;
-    private $public;
+    private $isPublic;
     private $branches;
+    private $token_api;
 
-    const PublicVisibility = 'public';
+    const PUBLIC_VISIBILITY = 'public';
 
     /**
      * @param string $owner
      * @param string $name
      * @param string $visibility
      */
-    public function Repository(string $owner, string $name, string $visibility)
+    public function __construct(string $owner, string $name, string $visibility)
     {
-        $this->owner = $owner;
-        $this->name = $name;
-        $this->public = $visibility === PublicVisibility;
-        $this->client = new Client($_SERVER['API_TOKEN']);
+        $this->owner     = $owner;
+        $this->name      = $name;
+        $this->api_token = $_SERVER['API_TOKEN'];
+        $this->isPublic  = $visibility === PUBLIC_VISIBILITY;
+        $this->client    = new Client($this->api_token);
+        $this->branches  = '';
     }
 
     /**
@@ -35,9 +38,9 @@ class Repository
     /**
      * @return bool
      */
-    public function getPublic(): bool
+    public function isPublic(): bool
     {
-        return $this->public;
+        return $this->isPublic;
     }
 
     /**
