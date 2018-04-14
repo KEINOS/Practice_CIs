@@ -22,7 +22,7 @@ class Repository
         $this->owner     = $owner;
         $this->name      = $name;
         $this->api_token = $_SERVER['API_TOKEN'];
-        $this->isPublic  = $visibility === PUBLIC_VISIBILITY;
+        $this->is_Public  = $visibility === PUBLIC_VISIBILITY;
         $this->client    = new Client($this->api_token);
         $this->branches  = '';
     }
